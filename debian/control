@@ -1,0 +1,26 @@
+Source: fort
+Maintainer: FORT Validator <fort-validator@nic.mx>
+Uploaders: Alberto Leiva Popper <ydahhrk@gmail.com>
+Section: net
+Priority: optional
+Build-Depends: debhelper-compat (= 11),
+ debhelper (>= 11),
+ pkg-config,
+ libcurl4-openssl-dev,
+ libjansson-dev,
+ libssl-dev,
+ libxml2-dev,
+Standards-Version: 4.5.1
+Rules-Requires-Root: no
+Homepage: https://nicmx.github.io/FORT-validator
+Vcs-Git: https://github.com/NICMx/FORT-validator.git
+Vcs-Browser: https://github.com/NICMx/FORT-validator
+
+Package: fort
+Architecture: any
+Multi-Arch: foreign
+Depends: ${shlibs:Depends}, ${misc:Depends}, adduser, rsync,
+ libcurl4, libxml2,
+Description: RPKI validator and RTR server
+ FORT validator is an RPKI Relying Party software: it performs the
+ validation of the RPKI repository and serves the ROAs to the routers.
