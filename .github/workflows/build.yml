@@ -1,0 +1,56 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    # https://nicmx.github.io/FORT-validator/installation.html#debian-version
+    - name: Install dependencies
+      run: sudo apt install autoconf automake build-essential libjansson-dev libssl-dev pkg-config rsync libcurl4-openssl-dev libxml2-dev
+    - uses: actions/checkout@v2
+    - name: autogen
+      run: ./autogen.sh
+    - name: configure
+      run: ./configure
+
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        queries: +security-and-quality
+      # Override language selection by uncommenting this and choosing your languages
+      # with:
+      #   languages: go, javascript, csharp, python, cpp, java
+
+    # Autobuild attempts to build any compiled languages (C/C++, C#, or Java).
+    # If this step fails, then you should remove it and run the build manually (see below).
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
+
+    # ℹ️ Command-line programs to run using the OS shell.
+    # 📚 https://git.io/JvXDl
+
+    # ✏️ If the Autobuild fails above, remove it and uncomment the following
+    #    three lines and modify them (or add more) to build your code if your
+    #    project uses a compiled language
+
+    #- run: |
+    #     make bootstrap
+    #     make release
+    # - name: make
+    #   run: make
+    # - name: make check
+    #   run: make check
+    # - name: make distcheck
+    #   run: make distcheck
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
