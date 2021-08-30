@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # https://nicmx.github.io/FORT-validator/installation.html#debian-version
+    - name: Install dependencies
+      run: sudo apt install autoconf automake build-essential libjansson-dev libssl-dev pkg-config rsync libcurl4-openssl-dev libxml2-dev
     - uses: actions/checkout@v2
     - name: configure
       run: ./configure
