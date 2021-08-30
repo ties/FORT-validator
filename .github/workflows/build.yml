@@ -16,6 +16,8 @@ jobs:
     - name: Install dependencies
       run: sudo apt install autoconf automake build-essential libjansson-dev libssl-dev pkg-config rsync libcurl4-openssl-dev libxml2-dev
     - uses: actions/checkout@v2
+    - name: autogen
+      run: ./autogen.sh
     - name: configure
       run: ./configure
     - name: make
